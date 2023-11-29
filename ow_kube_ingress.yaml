@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: openwhisk-ingress
+  namespace: openwhisk
+spec:
+  rules:
+  - host: openwhisk.example.com  # Replace with your domain
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: openwhisk
+            port:
+              number: 31001

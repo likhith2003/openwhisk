@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openwhisk
+  namespace: openwhisk
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: openwhisk
+  template:
+    metadata:
+      labels:
+        name: openwhisk
+    spec:
+      containers:
+        - name: whisk-controller
+          image: apache/openwhisk-controller:3.0.0
+          env:
+            - name: DB_PREFIX
+              value: "owdev"
+  # Add other components (invokers, kafka, zookeeper) as needed

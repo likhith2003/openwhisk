@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: openwhisk
+  namespace: openwhisk
+spec:
+  selector:
+    name: openwhisk
+  ports:
+    - protocol: TCP
+      port: 31001
+      targetPort: 31001

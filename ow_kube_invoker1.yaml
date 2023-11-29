@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openwhisk-invoker1
+  namespace: openwhisk
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: openwhisk-invoker1
+  template:
+    metadata:
+      labels:
+        name: openwhisk-invoker1
+    spec:
+      containers:
+        - name: whisk-invoker
+          image: apache/openwhisk-invoker:3.0.0
+          env:
+            - name: CONTROLLER
+              value: "openwhisk"
+            - name: KUBE_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
